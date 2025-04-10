@@ -95,6 +95,8 @@ body {
     background-color: rgb(10, 66, 131);
 }
 
+/* Current Weather Forecast */
+
 .current-weather-card {
     text-align: center;
     padding: 20px 0;
@@ -144,6 +146,8 @@ body {
     font-size: 0.9rem;
 }
 
+/* 3 hour forecasts */
+
 .hourly-forecast {
     margin-top: 20px;
 }
@@ -186,7 +190,7 @@ body {
     font-size: 1.1rem;
 }
 
-/* Main Content Styles */
+/* Weather Map */
 .weather-main {
     flex: 1;
     padding: 20px;
@@ -201,6 +205,8 @@ body {
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
+/* Current Conditions */
 
 .weather-details {
     background-color: #455A64;
@@ -235,6 +241,8 @@ body {
     margin-left: auto;
     font-weight: bold;
 }
+
+/* 5-Day Forecast */
 
 .daily-forecast {
     background-color: #455A64;
@@ -306,5 +314,3 @@ body {
     justify-content: space-between;
     margin-top: 10px;
 }
-
-
