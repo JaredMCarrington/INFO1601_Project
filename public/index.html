@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather.io</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="leaflet-openweathermap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Left Sidebar -->
+        <div class="weather-sidebar">
+
+            <div class="Sign-upLogin">
+                <button id="SignUp" type="submit" onclick="SignUp()">Sign Up</button>
+                <button id="Login" type="submit" onclick="Login()">Login</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="userLocation" placeholder="Search location...">
+                <button onclick="findUserLocation()"><i class="fa fa-search"></i></button>
+            </div>
+
+            <div class="saveLocation">
+                <button id="save" type="submit" onclick="saveLocation()">Save Location</button>
+            </div>
+           
+            
+            <div class="current-weather-card">
+                <div class="weather-icon-container">
+                    <img id="weatherIcon" src="" alt="Weather icon">
+                </div>
+                <div class="temp-main">
+                    <span id="temperature">--°C</span>
+                    <div class="feels-like">Feels like: <span id="feelslike">--°C</span></div>
+                </div>
+                <div class="weather-desc" id="description">--</div>
+                <div class="location" id="city">--</div>
+                <div class="date" id="date">--</div>
+            </div>
+
+            <div class="hourly-forecast">
+                <h3>3-Hour Forecast</h3>
+                <div class="hourly-container" id="hourlyForecast"></div>
+            </div>
+
+            
+        </div>
+
+        <!-- Main Content -->
+        <div class="weather-main">
+            <div id="map"></div>
+            
+            <div class="weather-details">
+                <h2>Current Conditions</h2>
+                <div class="detail-grid">
+                    <div class="detail-item">
+                        <i class="fa-solid fa-droplet"></i>
+                        <span>Humidity</span>
+                        <span id="humidity">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-wind"></i>
+                        <span>Wind</span>
+                        <span id="wind">-- m/s</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-cloud"></i>
+                        <span>Clouds</span>
+                        <span id="clouds">--%</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fa-solid fa-gauge-high"></i>
+                        <span>Pressure</span>
+                        <span id="pressure">-- hPa</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="daily-forecast">
+                <h2>5-Day Forecast</h2>
+                <div class="forecast-container" id="forecast"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="leaflet-openweathermap.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
