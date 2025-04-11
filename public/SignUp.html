@@ -63,12 +63,12 @@
         font-weight: bold;
     }
 
-    .login-btn {
+    #login-btn {
         background-color: #4CAF50;
         color: white;
     }
 
-    .register-btn {
+    #register-btn {
         background-color: #2196F3;
         color: white;
     }
@@ -83,29 +83,35 @@
         margin-bottom: 5px;
     }
 
-    #username, #password{
+    #email, #password{
         outline: none;
     }
 </style>
 <body>
     <main class="result">
-        <div class="card">
-            <div class="Title">
-                <h1>User Login</h1>
-            </div>
-            <div class="input-group">
-                <span>Username</span>
-                <input type="text" id="username" placeholder="Username...">
-            </div>
+        <form class="myForm">
+            <div class="card">
+                <div class="Title">
+                    <h1>User Login</h1>
+                </div>
+                <div class="input-group">
+                    <span>Email</span>
+                    <input type="text" id="email" placeholder="Email@idk.com...">
+                </div>
 
-            <div class="input-group">
-                <span>Password</span>
-                <input type="password" id="password" placeholder="Password...">
+                <div class="input-group">
+                    <span>Password</span>
+                    <input type="password" id="password" placeholder="Password...">
+                </div>
+                
+                <div id="errorDisplay"></div>
+                <button id="login-btn">Login</button>
+                <button id="register-btn">Register</button>
             </div>
-            
-            <button class="login-btn">Login</button>
-            <button class="register-btn">Register</button>
-        </div>
+        </form>
     </main>
+    <script type="module" src="./auth.js" defer>
+        import {Login, Register, auth, showError} from './auth.js';
+    </script>
 </body>
 </html>

@@ -36,7 +36,7 @@ body {
     font-size: 1rem;
     border-radius: 5px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: rgb(20, 233, 20);
+    background-color: #7ba1b3;
     cursor: pointer;
 }
 
@@ -48,12 +48,12 @@ body {
     border-radius: 5px;
     margin-left: 10px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    background-color: rgb(20, 233, 20);
+    background-color: #7ba1b3;
     cursor: pointer;
 }
 
 #SignUp:hover , #Login:hover{
-    background-color: rgb(17, 143, 17);
+    background-color: #6b8997;
 }
 
 .search-container {
