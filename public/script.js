@@ -33,7 +33,8 @@ function initMap(lat = 51.505, lon = -0.09) {
     const precipitation = L.OWM.precipitationClassic({showLegend: true, opacity: 0.7, appId: apiKey});
     const temp = L.OWM.temperature({showLegend: true, opacity: 0.4, appId: apiKey});
     const pressure = L.OWM.pressure({showLegend: true, opacity: 0.5, appId: apiKey});
-    var wind = L.OWM.wind({showLegend: true, opacity: 0.8, appId: apiKey});
+    const wind = L.OWM.wind({showLegend: true, opacity: 0.8, appId: apiKey});
+    const snow = L.OWM.snow({showLegend: true, opacity: 1.0, appId: apiKey});
     
     const baseMaps = {
         "OpenStreetMap": osm
@@ -44,7 +45,8 @@ function initMap(lat = 51.505, lon = -0.09) {
         "Precipitation": precipitation,
         "Temperature": temp,
         "Pressure": pressure,
-        "Wind Speed": wind
+        "Wind Speed": wind,
+        "Snow": snow
     };
     
     layerControl = L.control.layers(baseMaps, overlayMaps).addTo(map);

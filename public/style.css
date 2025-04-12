@@ -2,7 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    font-family: 'Arial', sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
 body {
@@ -25,9 +25,11 @@ body {
     flex-direction: column;
     overflow-y: auto;
 }
-
+    /* Login/Signin Stuff */
 .Sign-upLogin {
-    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 0;
 }
 #SignUp {
     border: 0;
@@ -51,9 +53,44 @@ body {
     background-color: #7ba1b3;
     cursor: pointer;
 }
+#SignUp, #Login {
+    margin-bottom: 10px; 
+}
 
 #SignUp:hover , #Login:hover{
     background-color: #6b8997;
+}
+
+    /*All auth stuff */
+.auth-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+#authStatus {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    color: white;
+    padding: 10px;
+}
+
+#logout-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#logout-btn:hover{
+    background-color: rgb(126, 12, 12);
+}
+
+#userEmail {
+    font-size: 0.9rem;
 }
 
 .search-container {
@@ -93,6 +130,79 @@ body {
 
 #save:hover {
     background-color: rgb(10, 66, 131);
+}
+
+.saved-locations {
+    margin-top: 20px;
+    padding: 15px 0;
+    border-top: 1px solid #546E7A;
+}
+
+.saved-locations h3 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.saved-locations-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    padding-right: 5px;
+}
+
+.saved-location-card {
+    background-color: #546E7A;
+    border-radius: 5px;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.saved-location-card:hover {
+    background-color: #607D8B;
+}
+
+.saved-location-name {
+    flex-grow: 1;
+    font-size: 0.95rem;
+}
+
+.delete-location-btn {
+    background: none;
+    border: none;
+    color: #CFD8DC;
+    cursor: pointer;
+    padding: 5px;
+    margin-left: 10px;
+    font-size: 0.8rem;
+}
+
+.delete-location-btn:hover {
+    color: #f44336;
+}
+
+/* Scrollbar styling */
+.saved-locations-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.saved-locations-container::-webkit-scrollbar-track {
+    background: #455A64;
+    border-radius: 3px;
+}
+
+.saved-locations-container::-webkit-scrollbar-thumb {
+    background: #607D8B;
+    border-radius: 3px;
+}
+
+.saved-locations-container::-webkit-scrollbar-thumb:hover {
+    background: #78909C;
 }
 
 /* Current Weather Forecast */
@@ -313,4 +423,88 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+}
+
+/* Everthing mobile */
+
+@media only screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    .weather-sidebar {
+        width: 100%;
+        order: 1; 
+        padding: 15px;
+    }
+    
+    .weather-main {
+        order: 2; 
+        padding: 15px;
+    }
+    
+    #map {
+        height: 300px;
+    }
+    
+    .hourly-container {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 10px;
+    }
+    
+    .hourly-card {
+        min-width: 120px; 
+        flex: 0 0 auto;
+    }
+    
+    .forecast-container {
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    
+    .forecast-card {
+        width: 48%; 
+        margin-bottom: 10px;
+    }
+    
+    .search-container {
+        margin-bottom: 15px;
+    }
+    
+    .current-weather-card {
+        padding: 15px 0;
+    }
+    
+    #weatherIcon {
+        width: 100px;
+        height: 100px;
+    }
+    
+    #temperature {
+        font-size: 2.5rem;
+    }
+    
+    .weather-details, .daily-forecast {
+        padding: 15px;
+    }
+    
+    .detail-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .saved-locations-container {
+        max-height: 150px;
+    }
+    
+    .auth-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .Sign-upLogin {
+        margin-bottom: 10px;
+    }
 }

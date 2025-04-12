@@ -89,29 +89,60 @@
 </style>
 <body>
     <main class="result">
-        <form class="myForm">
+        <form class="myForm" id="authForm">
             <div class="card">
                 <div class="Title">
                     <h1>User Login</h1>
                 </div>
                 <div class="input-group">
                     <span>Email</span>
-                    <input type="text" id="email" placeholder="Email@idk.com...">
+                    <input type="text" id="email" placeholder="Email@idk.com..." required>
                 </div>
 
                 <div class="input-group">
                     <span>Password</span>
-                    <input type="password" id="password" placeholder="Password...">
+                    <input type="password" id="password" placeholder="Password..." required>
                 </div>
                 
                 <div id="errorDisplay"></div>
-                <button id="login-btn">Login</button>
-                <button id="register-btn">Register</button>
+                <button id="login-btn" type="button">Login</button>
+                <button id="register-btn" type="button" >Register</button>
             </div>
         </form>
     </main>
-    <script type="module" src="./auth.js" defer>
-        import {Login, Register, auth, showError} from './auth.js';
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="module">
+        import { loginUser, registerUser } from './auth.js';
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginBtn = document.getElementById('login-btn');
+            const registerBtn = document.getElementById('register-btn');
+            const emailInput = document.getElementById('email');
+            const passwordInput = document.getElementById('password');
+
+            const handleAuth = async (isLogin) => {
+                const email = emailInput.value;
+                const password = passwordInput.value;
+                
+                if (!email || !password) {
+                    document.getElementById('errorDisplay').textContent = "Please fill in all fields";
+                    return;
+                }
+
+                try {
+                    if (isLogin) {
+                        await loginUser(email, password);
+                    } else {
+                        await registerUser(email, password);
+                    }
+                } catch (error) {
+                    console.error("Auth error:", error);
+                }
+            };
+
+            loginBtn.addEventListener('click', () => handleAuth(true));
+            registerBtn.addEventListener('click', () => handleAuth(false));
+        });
     </script>
 </body>
 </html>

@@ -13,20 +13,25 @@
     <div class="container">
         
         <div class="weather-sidebar">
-
-            <div class="Sign-upLogin">
-                <button id="SignUp" type="submit" onclick="SignUp()">Sign Up</button>
-                <button id="Login" type="submit" onclick="Login()">Login</button>
+            <div class="auth-container">
+                <div class="Sign-upLogin">
+                    <button id="SignUp" type="button">Sign Up</button>
+                    <button id="Login" type="button">Login</button>
+                </div>
+                <div id="authStatus">
+                    <span id="userEmail"></span>
+                    <button id="logout-btn" type="button">Logout</button>
+                </div>
             </div>
+                <div class="search-container">
+                    <input type="text" id="userLocation" placeholder="Search location...">
+                    <button onclick="findUserLocation()"><i class="fa fa-search"></i></button>
+                </div>
 
-            <div class="search-container">
-                <input type="text" id="userLocation" placeholder="Search location...">
-                <button onclick="findUserLocation()"><i class="fa fa-search"></i></button>
-            </div>
+                <div class="saveLocation">
+                    <button id="save" type="submit" onclick="saveLocation()">Save Location</button>
+                </div>
 
-            <div class="saveLocation">
-                <button id="save" type="submit" onclick="saveLocation()">Save Location</button>
-            </div>
             
             <div class="current-weather-card">
                 <div class="weather-icon-container">
@@ -44,6 +49,11 @@
             <div class="hourly-forecast">
                 <h3>3-Hour Forecast</h3>
                 <div class="hourly-container" id="hourlyForecast"></div>
+            </div>
+
+            <div class="saved-locations">
+                <h3>Saved Locations</h3>
+                <div class="saved-locations-container" id="savedLocations"></div>
             </div>
 
             
@@ -89,7 +99,105 @@
     <script src="script.js"></script>
 
     <script type="module">
+        import { auth, loginUser, registerUser, logoutUser, onAuthStateChanged } from './auth.js';
+        import { saveUserLocation, getUserSavedLocations, deleteSavedLocation } from './data.js';
         
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('Login')?.addEventListener('click', () => {
+                window.location.href = './SignUp.html';
+            });
+            
+            document.getElementById('SignUp')?.addEventListener('click', () => {
+                window.location.href = './SignUp.html';
+            });
+            
+            document.getElementById('logout-btn')?.addEventListener('click', async () => {
+                const success = await logoutUser();
+                if (success) {
+                    updateAuthUI();
+                }
+            });
+            
+            const saveBtn = document.getElementById('save');
+            if (saveBtn) {
+                saveBtn.addEventListener('click', async () => {
+                    const locationInput = document.getElementById('userLocation');
+                    if (!locationInput.value.trim()) return;
+                    
+                    const user = auth.currentUser;
+                    if (!user) {
+                        alert('Please login to save locations');
+                        return;
+                    }
+                    
+                    const success = await saveUserLocation(user.uid, locationInput.value.trim());
+                    if (success) {
+                        loadSavedLocations(user.uid);
+                        locationInput.value = ''; 
+                    }
+                });
+            }
+            
+            async function loadSavedLocations(userId) {
+                const savedLocationsContainer = document.getElementById('savedLocations');
+                if (!savedLocationsContainer) return;
+                
+                savedLocationsContainer.innerHTML = '';
+                const locations = await getUserSavedLocations(userId);
+                
+                locations.forEach(location => {
+                    const locationCard = document.createElement('div');
+                    locationCard.className = 'saved-location-card';
+                    locationCard.innerHTML = `
+                        <span class="saved-location-name">${location.location}</span>
+                        <button class="delete-location-btn" data-id="${location.id}">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    `;
+                    
+                    locationCard.querySelector('.saved-location-name').addEventListener('click', () => {
+                        document.getElementById('userLocation').value = location.location;
+                        findUserLocation(); 
+                    });
+                    
+                    locationCard.querySelector('.delete-location-btn').addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        const success = await deleteSavedLocation(location.id);
+                        if (success) {
+                            loadSavedLocations(userId);
+                        }
+                    });
+                    savedLocationsContainer.appendChild(locationCard);
+                });
+            }
+            
+            function updateAuthUI() {
+                const user = auth.currentUser;
+                const authStatus = document.getElementById('authStatus');
+                const loginBtn = document.getElementById('Login');
+                const signupBtn = document.getElementById('SignUp');
+                const saveBtn = document.getElementById('save');
+    
+                if (user) {
+                    document.getElementById('userEmail').textContent = user.email;
+                    authStatus.style.display = 'flex';
+                    loginBtn.style.display = 'none';
+                    signupBtn.style.display = 'none';
+                    loadSavedLocations(user.uid);
+                } else {
+                    authStatus.style.display = 'none';
+                    loginBtn.style.display = 'block';
+                    signupBtn.style.display = 'block';
+                    const savedLocationsContainer = document.getElementById('savedLocations');
+                    if (savedLocationsContainer) savedLocationsContainer.innerHTML = '';
+                }
+            }
+
+            onAuthStateChanged(auth, (user) => {
+                updateAuthUI();
+            });
+            updateAuthUI();
+        });
     </script>
 </body>
 </html>
