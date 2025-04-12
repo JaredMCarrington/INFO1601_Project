@@ -10,7 +10,7 @@ const mapElement = document.getElementById("map");
 const forecastContainer = document.getElementById("forecast");
 const hourlyForecastContainer = document.getElementById("hourlyForecast");
 
-const apiKey = "564e80d44861fd35d80644350a721550";
+const apiKey = "fb31b12ce7fd60690a53d70033ad5ae4";
 const weatherApiEndpoint = `https://api.openweathermap.org/data/2.5/weather?appid=${apiKey}&units=metric&q=`;
 const forecastApiEndpoint = `https://api.openweathermap.org/data/2.5/forecast?appid=${apiKey}&units=metric`;
 

@@ -6,7 +6,7 @@
 
 L.OWM = L.TileLayer.extend({
 	options: {
-		appId: '564e80d44861fd35d80644350a721550', /* pass your own AppId as parameter when creating the layer. Get your own AppId at https://www.openweathermap.org/appid */
+		appId: 'fb31b12ce7fd60690a53d70033ad5ae4', /* pass your own AppId as parameter when creating the layer. Get your own AppId at https://www.openweathermap.org/appid */
 		baseUrl: "https://{s}.tile.openweathermap.org/map/{layername}/{z}/{x}/{y}.png",
 		maxZoom: 18,
 		showLegend: true,
@@ -225,7 +225,7 @@ L.OWM.LegendControl = L.Control.extend({
 L.OWM.Current = L.Layer.extend({
 
 	options: {
-		appId: '564e80d44861fd35d80644350a721550', // get your free Application ID at www.openweathermap.org
+		appId: 'fb31b12ce7fd60690a53d70033ad5ae4', // get your free Application ID at www.openweathermap.org
 		type: 'city', // available types: 'city'. 'station' is not supported any more
 		lang: 'en', // available: 'en', 'de', 'ru', 'fr', 'nl', 'es', 'ca' (not every language is finished yet)
 		minZoom: 7,
